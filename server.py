@@ -90,5 +90,13 @@ def instantly_webhook():
     note_body = "\n".join(note_lines)
 
     # Записываем в HubSpot
-    result, status = log_note_to_hubspot(email, note_body, timestamp)
+    from datetime import datetime
+
+    # Преобразование ISO-строки в миллисекунды
+    try:
+        ts = int(datetime.fromisoformat(timestamp.replace("Z", "+00:00")).timestamp() * 1000)
+    except Exception:
+        return jsonify({"error": "Invalid timestamp format"}), 400
+    
+    result, status = log_note_to_hubspot(email, note_body, ts)
     return jsonify({"hubspot_response": result}), status
