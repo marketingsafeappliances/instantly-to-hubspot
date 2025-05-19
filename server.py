@@ -9,7 +9,8 @@ HUBSPOT_TOKEN = os.getenv("HUBSPOT_TOKEN")
 @app.route('/api/instantly-webhook', methods=['POST'])
 def webhook():
     data = request.get_json()
-    email = data.get("email")
+    #email = data.get("email")
+    print("Incoming Webhook:", data)
 
     if not email:
         return jsonify({"error": "No email provided"}), 400
