@@ -20,8 +20,7 @@ def webhook():
     }
     payload = {
         "properties": {
-            "email": email,
-            "lead_source": "Instantly Webhook"
+            "email": email
         }
     }
 
